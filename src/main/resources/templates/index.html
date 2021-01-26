@@ -26,26 +26,38 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a href="index.html">Transit</a></h1>
+				<h1><a href="index.html">Community</a></h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="ex/generic.html">Board</a></li>
+						<li><a href="/">Home</a></li>
+						<li><a href="/board/list">Board</a></li>
 						<li><a href="ex/elements.html">Elements</a></li>
-						<li><a href="/login" class="button special">Sign in</a></li>
+						<li th:if="${session.user == null}"><a href="/login" class="button special">Sign in</a></li>
+						<li th:unless="${session.user == null}"><a href="/logout" class="button special">Log out</a></li>
 					</ul>
 				</nav>
 			</header>
 
 		<!-- Banner -->
 			<section id="banner">
-				<h2>Hi. This is Transit.</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-				<ul class="actions">
-					<li>
-						<a href="#" class="button big">Lorem ipsum dolor</a>
-					</li>
-				</ul>
+				<div th:if="${session.user == null}">
+					<h2 >Hi. This is Transit.</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<ul class="actions">
+						<li>
+							<a href="#" class="button big">Lorem ipsum dolor</a>
+						</li>
+					</ul>
+				</div>
+				<div th:unless="${session.user == null}">
+					<h2 > <span th:text="${session.user.getId()}"></span> WELCOME </h2>
+					<p>안녕하세요. 커뮤니티 스터디입니다.</p>
+					<ul class="actions">
+						<li>
+							<a href="/board/list" class="button big">게시판으로 바로가기</a>
+						</li>
+					</ul>
+				</div>
 			</section>
 
 		<!-- One -->

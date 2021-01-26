@@ -21,15 +21,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
-    public String index() {
-        return "index";
-    }
 
     //Login Get
     @GetMapping(value = "/login")
     public String loginGet(User user) {
-        return "user/login";
+        return "/user/login";
     }
 
     //Login Post
@@ -65,17 +61,10 @@ public class UserController {
     public String myPage(){
         return "user/mypage";
     }
+
     @PostMapping("/logout")
     public void logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
     }
-
-
-    /*
-    @GetMapping("/list")
-    public String userList( Model model){
-        model.addAttribute("list",userService.list());
-        return "user/list";
-    }*/
 }

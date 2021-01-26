@@ -1,2 +1,0 @@
-study/community/CommunityApplicationTests.java
- study.community.CommunityApplicationTests
