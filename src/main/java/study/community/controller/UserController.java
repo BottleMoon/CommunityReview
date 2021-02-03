@@ -53,18 +53,24 @@ public class UserController {
     public String signupPost(User user) {
         userService.createUser(user);
 
-        return "index";
+        return "redirect:/login";
     }
 
     //Mypage Get
     @GetMapping("/mypage")
-    public String myPage(){
+    public String myPage(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null){
+            return "redirect:/login";
+        }
         return "user/mypage";
     }
 
-    @PostMapping("/logout")
-    public void logout(HttpServletRequest request){
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
+        return "redirect:/";
     }
 }

@@ -36,8 +36,10 @@ public class BoardController {
 
     //Board
     @GetMapping("board/{idx}")
-    public String board(@PathVariable Long idx, Model model){
+    public String board(@PathVariable("idx") Long idx, Model model){
         model.addAttribute("board",boardService.getByIdx(idx));
+
+        System.out.println(boardService.getByIdx(idx).getIdx() + "||" + boardService.getByIdx(idx).getTitle());
         return "board/board";
     }
 
@@ -51,6 +53,6 @@ public class BoardController {
     public String processingCreateBoard(Board board, HttpServletRequest request){
         User user = (User)request.getSession().getAttribute("user");
         boardService.createBoard(board, user);
-        return "redirect:/";
+        return "redirect:/board/list";
     }
 }

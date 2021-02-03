@@ -23,8 +23,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Optional<Board> getByIdx(Long idx) {
-        return boardRepository.findById(idx);
+    public Board getByIdx(Long idx) {
+        return boardRepository.getOne(idx);
     }
 
     public void createBoard(Board board, User user) {

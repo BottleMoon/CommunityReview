@@ -26,12 +26,12 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a href="index.html">Community</a></h1>
+				<h1><a href="/">Community</a></h1>
 				<nav id="nav">
 					<ul>
 						<li><a href="/">Home</a></li>
 						<li><a href="/board/list">Board</a></li>
-						<li><a href="ex/elements.html">Elements</a></li>
+						<li><a href="/mypage">MyPage</a></li>
 						<li th:if="${session.user == null}"><a href="/login" class="button special">Sign in</a></li>
 						<li th:unless="${session.user == null}"><a href="/logout" class="button special">Log out</a></li>
 					</ul>
@@ -90,78 +90,6 @@
 							</section>
 						</div>
 					</div>
-				</div>
-			</section>
-
-		<!-- Two -->
-			<section id="two" class="wrapper style2 special">
-				<div class="container">
-					<header class="major">
-						<h2>Lorem ipsum dolor sit</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, autem.</p>
-					</header>
-					<section class="profiles">
-						<div class="row">
-							<section class="3u 6u(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Lorem ipsum</h4>
-								<p>Lorem ipsum dolor</p>
-							</section>
-							<section class="3u 6u$(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Voluptatem dolores</h4>
-								<p>Ullam nihil repudi</p>
-							</section>
-							<section class="3u 6u(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Doloremque quo</h4>
-								<p>Harum corrupti quia</p>
-							</section>
-							<section class="3u$ 6u$(medium) 12u$(xsmall) profile">
-								<img src="images/profile_placeholder.gif" alt="" />
-								<h4>Voluptatem dicta</h4>
-								<p>Et natus sapiente</p>
-							</section>
-						</div>
-					</section>
-					<footer>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam dolore illum, temporibus veritatis eligendi, aliquam, dolor enim itaque veniam aut eaque sequi qui quia vitae pariatur repudiandae ab dignissimos ex!</p>
-						<ul class="actions">
-							<li>
-								<a href="#" class="button big">Lorem ipsum dolor sit</a>
-							</li>
-						</ul>
-					</footer>
-				</div>
-			</section>
-
-		<!-- Three -->
-			<section id="three" class="wrapper style3 special">
-				<div class="container">
-					<header class="major">
-						<h2>Consectetur adipisicing elit</h2>
-						<p>Lorem ipsum dolor sit amet. Delectus consequatur, similique quia!</p>
-					</header>
-				</div>
-				<div class="container 50%">
-					<form action="#" method="post">
-						<div class="row uniform">
-							<div class="6u 12u$(small)">
-								<input name="name" id="name" value="" placeholder="Name" type="text">
-							</div>
-							<div class="6u$ 12u$(small)">
-								<input name="email" id="email" value="" placeholder="Email" type="email">
-							</div>
-							<div class="12u$">
-								<textarea name="message" id="message" placeholder="Message" rows="6"></textarea>
-							</div>
-							<div class="12u$">
-								<ul class="actions">
-									<li><input value="Send Message" class="special big" type="submit"></li>
-								</ul>
-							</div>
-						</div>
-					</form>
 				</div>
 			</section>
 
