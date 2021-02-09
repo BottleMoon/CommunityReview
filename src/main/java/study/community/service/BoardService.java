@@ -31,4 +31,12 @@ public class BoardService {
         board.setUser(user);
         boardRepository.save(board);
     }
+
+    public void updateBoard(Board board){
+        boardRepository.save(board);
+    }
+
+    public void deleteBoardByIdx(long idx) {
+        boardRepository.deleteById(idx);
+    }
 }

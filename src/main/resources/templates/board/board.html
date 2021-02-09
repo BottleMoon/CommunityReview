@@ -42,6 +42,8 @@
 <section id="main" class="wrapper">
     <div th:text="${board.title}"></div>
     <div th:text="${board.text}"></div>
+    <a th:href="@{'/board/'+${board.idx}+'/delete'}" class="button special">글 삭제</a>
+    <a th:href="@{'/board/'+${board.idx}+'/update'}" class="button special">글 수정</a>
 </section>
 
 <!-- Footer -->
