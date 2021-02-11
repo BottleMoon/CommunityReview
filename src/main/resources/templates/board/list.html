@@ -46,6 +46,8 @@
             <th>No</th>
             <th>Title</th>
             <th>Writer</th>
+            <th>Created Time</th>
+            <th>Updated Time</th>
         </tr>
         <tr th:each="board : ${boardList}">
             <td th:text="${board.idx}"> </td>
@@ -55,6 +57,8 @@
                 </a>
             </td>
             <td th:text="${board.user.getId()}"></td>
+            <td th:text="${#temporals.format(board.createdTime,'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(board.updatedTime,'yyyy-MM-dd HH:mm')}"></td>
         </tr>
     </table>
     <a href="/board/new" class="button">글 작성</a>

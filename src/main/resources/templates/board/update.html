@@ -41,6 +41,7 @@
 		<!-- Main -->
 			<section id="main" class="wrapper">
 				<form th:action="@{'/board/'+${board.getIdx()}+'/update'}" th:object="${board}" method="post">
+					<input type="hidden" th:value="*{createdTime}" th:field="*{createdTime}">
 					<div class="4u 12u$(4)">
 						<input type="text" th:value="*{title}" th:field="*{title}" placeholder="TITLE" required>
 					</div>

@@ -6,6 +6,7 @@ import study.community.domain.Board;
 import study.community.domain.User;
 import study.community.repository.BoardRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +30,12 @@ public class BoardService {
 
     public void createBoard(Board board, User user) {
         board.setUser(user);
+        board.setCreatedTime(LocalDateTime.now());
         boardRepository.save(board);
     }
 
     public void updateBoard(Board board){
+        board.setUpdatedTime(LocalDateTime.now());
         boardRepository.save(board);
     }
 
