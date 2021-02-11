@@ -1,7 +1,7 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-
+application.properties
 ### STS ###
 .apt_generated
 .classpath
@@ -29,3 +29,7 @@ nbdist/
 
 ### class ###
 *.class
+
+### properties ###
+*.properties
+build.gradle
