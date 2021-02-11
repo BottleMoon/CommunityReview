@@ -31,8 +31,9 @@ public class UserController {
     //Login Post
     @PostMapping(value = "/login")
     public String loginPost(User user, HttpServletRequest req)throws Exception {
-        user = userService.findById(user.getId());
+
         if (userService.login(user)) {
+            user = userService.findById(user.getId());
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
         }
