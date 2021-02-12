@@ -24,8 +24,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Board getByIdx(Long idx) {
-        return boardRepository.getOne(idx);
+    public Optional<Board> getByIdx(Long idx) {
+        return boardRepository.findById(idx);
     }
 
     public void createBoard(Board board, User user) {

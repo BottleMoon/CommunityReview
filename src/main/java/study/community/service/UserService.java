@@ -20,13 +20,12 @@ public class UserService {
     }
 
     public boolean createUser(User user){
-        try{
-            user.setCreateDate(LocalDateTime.now());
-            userRepository.save(user);
-            return true;
-        } catch (Exception e){
+        if(existsById(user.getId())){
             return false;
         }
+        user.setCreateDate(LocalDateTime.now());
+        userRepository.save(user);
+        return true;
     }
     public boolean login(User user)throws Exception{
         boolean same = false;
@@ -55,5 +54,14 @@ public class UserService {
             }
         }
         return null;
+    }
+    public boolean existsById(String id){
+        boolean result = false;
+        for(User i : userRepository.findAll()){
+            if(id.equals(i.getId())){
+                result = true;
+            }
+        }
+        return result;
     }
 }

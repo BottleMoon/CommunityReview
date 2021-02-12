@@ -4,7 +4,7 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Generic - Transit by TEMPLATED</title>
@@ -24,6 +24,7 @@
 </head>
 <body>
 
+
 <!-- Header -->
 <header id="header">
     <h1><a href="/">Community</a></h1>
@@ -40,8 +41,10 @@
 
 <!-- Main -->
 <section id="main" class="wrapper">
-    <div th:text="${board.title}"></div>
-    <div th:text="${board.text}"></div>
+    <strong><div th:text="${board.title}" style=""></div></strong>
+    <div><span th:text="${board.user.id}"> </span> | <span th:text="${#temporals.format(board.createdTime,'yyyy-MM-dd  HH:mm')}"></span></div>
+    <hr>
+    <div style="min-height: 200px" th:text="${board.text}"></div>
     <a th:href="@{'/board/'+${board.idx}+'/delete'}" class="button special">글 삭제</a>
     <a th:href="@{'/board/'+${board.idx}+'/update'}" class="button special">글 수정</a>
 </section>

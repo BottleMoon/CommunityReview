@@ -25,7 +25,7 @@ public class UserController {
     //Login Get
     @GetMapping(value = "/login")
     public String loginGet(User user) {
-        return "/user/login";
+        return "user/login";
     }
 
     //Login Post
@@ -52,9 +52,12 @@ public class UserController {
     //signup Post
     @PostMapping(value = "/signup")
     public String signupPost(User user) {
-        userService.createUser(user);
-
-        return "redirect:/login";
+        if(userService.createUser(user)) {
+            return "redirect:/login";
+        }
+        else {
+            return "redirect:/signup";
+        }
     }
 
     //Mypage Get
