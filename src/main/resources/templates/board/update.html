@@ -7,22 +7,22 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
-		<title>Transit by TEMPLATED</title>
+		<title>Generic - Transit by TEMPLATED</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/skel.min.js"></script>
+		<script src="/js/skel-layers.min.js"></script>
+		<script src="/js/init.js"></script>
 		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
+			<link rel="stylesheet" href="/css/skel.css" />
+			<link rel="stylesheet" href="/css/style.css" />
+			<link rel="stylesheet" href="/css/style-xlarge.css" />
 		</noscript>
 	</head>
-	<body class="landing">
+	<body>
 
 		<!-- Header -->
 			<header id="header">
@@ -38,59 +38,18 @@
 				</nav>
 			</header>
 
-		<!-- Banner -->
-			<section id="banner">
-				<div th:if="${session.user == null}">
-					<h2 >Hi. This is Transit.</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<ul class="actions">
-						<li>
-							<a href="#" class="button big">Lorem ipsum dolor</a>
-						</li>
-					</ul>
-				</div>
-				<div th:unless="${session.user == null}">
-					<h2 > <span th:text="${session.user.getId()}"></span> WELCOME </h2>
-					<p>안녕하세요. 커뮤니티 스터디입니다.</p>
-					<ul class="actions">
-						<li>
-							<a href="/board/list" class="button big">게시판으로 바로가기</a>
-						</li>
-					</ul>
-				</div>
-			</section>
-
-		<!-- One -->
-			<section id="one" class="wrapper style1 special">
-				<div class="container">
-					<header class="major">
-						<h2>Consectetur adipisicing elit</h2>
-						<p>Lorem ipsum dolor sit amet, delectus consequatur, similique quia!</p>
-					</header>
-					<div class="row 150%">
-						<div class="4u 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color1 fa-cloud"></i>
-								<h3>Lorem ipsum dolor</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim quam consectetur quibusdam magni minus aut modi aliquid.</p>
-							</section>
-						</div>
-						<div class="4u 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color9 fa-desktop"></i>
-								<h3>Consectetur adipisicing</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium ullam consequatur repellat debitis maxime.</p>
-							</section>
-						</div>
-						<div class="4u$ 12u$(medium)">
-							<section class="box">
-								<i class="icon big rounded color6 fa-rocket"></i>
-								<h3>Adipisicing elit totam</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque eaque eveniet, nesciunt molestias. Ipsam, voluptate vero.</p>
-							</section>
-						</div>
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<form th:action="@{'/board/'+${board.getIdx()}+'/update'}" th:object="${board}" method="post">
+					<input type="hidden" th:value="*{createdTime}" th:field="*{createdTime}">
+					<div class="4u 12u$(4)">
+						<input type="text" th:value="*{title}" th:field="*{title}" placeholder="TITLE" required>
 					</div>
-				</div>
+					<div class="12u$">
+						<textarea rows="6" th:value="*{text}" th:field="*{text}" placeholder="TEXT" required></textarea>
+					</div>
+					<input type="submit" value="글 작성">
+				</form>
 			</section>
 
 		<!-- Footer -->

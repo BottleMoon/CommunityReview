@@ -21,10 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
-    public String index() {
-        return "index";
-    }
 
     //Login Get
     @GetMapping(value = "/login")
@@ -35,8 +31,9 @@ public class UserController {
     //Login Post
     @PostMapping(value = "/login")
     public String loginPost(User user, HttpServletRequest req)throws Exception {
-        user = userService.findById(user.getId());
+
         if (userService.login(user)) {
+            user = userService.findById(user.getId());
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
         }
@@ -55,27 +52,29 @@ public class UserController {
     //signup Post
     @PostMapping(value = "/signup")
     public String signupPost(User user) {
-        userService.createUser(user);
-
-        return "index";
+        if(userService.createUser(user)) {
+            return "redirect:/login";
+        }
+        else {
+            return "redirect:/signup";
+        }
     }
 
     //Mypage Get
     @GetMapping("/mypage")
-    public String myPage(){
+    public String myPage(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null){
+            return "redirect:/login";
+        }
         return "user/mypage";
     }
-    @PostMapping("/logout")
-    public void logout(HttpServletRequest request){
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.invalidate();
+        return "redirect:/";
     }
-
-
-    /*
-    @GetMapping("/list")
-    public String userList( Model model){
-        model.addAttribute("list",userService.list());
-        return "user/list";
-    }*/
 }

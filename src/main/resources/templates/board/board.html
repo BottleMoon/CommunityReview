@@ -5,7 +5,6 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta charset="UTF-8">
     <title>Generic - Transit by TEMPLATED</title>
@@ -13,17 +12,18 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-layers.min.js"></script>
-    <script src="js/init.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/skel-layers.min.js"></script>
+    <script src="/js/init.js"></script>
     <noscript>
-        <link rel="stylesheet" href="css/skel.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-xlarge.css" />
+        <link rel="stylesheet" href="/css/skel.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/style-xlarge.css" />
     </noscript>
 </head>
 <body>
+
 
 <!-- Header -->
 <header id="header">
@@ -41,19 +41,12 @@
 
 <!-- Main -->
 <section id="main" class="wrapper">
-    <form th:action="@{/login}" th:object="${user}" method="post">
-        <div>
-            <div class="4u 12u$(4)">
-                <input style="" type="text" th:field="*{id}" required placeholder="ID">
-            </div> <br>
-            <div class="4u 12u$(4)">
-                <input type="password" th:field="*{password}" required placeholder="PASSWORD">
-            </div>
-            <input type="submit" name="" value="로그인">
-        </div>
-    </form>
-
-    계정이 없으신가요?<a href="signup"> <strong>sign up</strong></a>
+    <strong><div th:text="${board.title}" style=""></div></strong>
+    <div><span th:text="${board.user.id}"> </span> | <span th:text="${#temporals.format(board.createdTime,'yyyy-MM-dd  HH:mm')}"></span></div>
+    <hr>
+    <div style="min-height: 200px" th:text="${board.text}"></div>
+    <a th:href="@{'/board/'+${board.idx}+'/delete'}" class="button special">글 삭제</a>
+    <a th:href="@{'/board/'+${board.idx}+'/update'}" class="button special">글 수정</a>
 </section>
 
 <!-- Footer -->

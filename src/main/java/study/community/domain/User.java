@@ -12,10 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idx;
 
+    @Id
     @Column
     private String id;
     @Column
