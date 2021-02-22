@@ -8,7 +8,10 @@ import study.community.domain.User;
 import study.community.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Controller
 public class UserController {
@@ -30,15 +33,20 @@ public class UserController {
 
     //Login Post
     @PostMapping(value = "/login")
-    public String loginPost(User user, HttpServletRequest req)throws Exception {
+    public String loginPost(User user, HttpServletRequest request, HttpServletResponse response)throws Exception {
 
         if (userService.login(user)) {
             user = userService.findById(user.getId());
-            HttpSession session = req.getSession();
+            HttpSession session = request.getSession();
             session.setAttribute("user", user);
         }
         else {
-            return "redirect:/login";
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('아이디 또는 비밀번호가 틀립니다.'); location.href='/login';</script> ");
+            out.flush();
+            //return "redirect:/login";
         }
         return "redirect:/";
     }
@@ -51,13 +59,19 @@ public class UserController {
 
     //signup Post
     @PostMapping(value = "/signup")
-    public String signupPost(User user) {
+    public String signupPost(User user, HttpServletResponse response) throws IOException {
         if(userService.createUser(user)) {
             return "redirect:/login";
         }
-        else {
-            return "redirect:/signup";
+        else{
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script> alert('이미 같은 아이디가 있습니다.'); location.href='/signup';</script>");
+            out.flush();
         }
+
+            return "redirect:/signup";
     }
 
     //Mypage Get

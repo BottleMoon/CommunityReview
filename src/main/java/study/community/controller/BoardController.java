@@ -9,7 +9,10 @@ import study.community.domain.User;
 import study.community.service.BoardService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Optional;
 
 @Controller
@@ -44,12 +47,19 @@ public class BoardController {
 
     //Write
     @GetMapping("board/new")
-    public String initCreateBoard(Board board, HttpServletRequest request) {
+    public String initCreateBoard(Board board, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
         if (session.getAttribute("user") != null) {
             return "board/new";
         }
-        else return "redirect:/board/list";
+        else{
+            out.println("<script> alert('로그인이 필요합니다.'); location.href='/board/list';</script>");
+            out.flush();
+        }
+            return "redirect:/board/list";
     }
     @PostMapping("board/new")
     public String processingCreateBoard(Board board, HttpServletRequest request){
@@ -59,16 +69,29 @@ public class BoardController {
     }
     //Update
     @GetMapping("/board/{idx}/update")
-    public String initUpdateBoard(@PathVariable Long idx, Model model,HttpServletRequest request){
+    public String initUpdateBoard(@PathVariable Long idx, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
         //로그인 정보와 작성자가 일치하는지 확인
-        if(boardService.getByIdx(idx).get().getUser().getId().equals(((User)session.getAttribute("user")).getId())) {
-            Board board = boardService.getByIdx(idx).get();
-            model.addAttribute("board", board);
+        if (session.getAttribute("user") != null) {
+            if (boardService.getByIdx(idx).get().getUser().getId()
+                    .equals(((User) session.getAttribute("user")).getId())) {
 
-            return "board/update";
+                Board board = boardService.getByIdx(idx).get();
+                model.addAttribute("board", board);
+
+                return "board/update";
+            } else {    //작성자 아니면 수정 못함
+                out.println("<script> alert('작성자만 수정할 수 있습니다.'); location.href='/board/" + idx + "';</script>");
+                out.flush();
+            }
+        } else {    //로그인 안하면 삭제 못함.
+            out.println("<script> alert('작성자만 수정할 수 있습니다.'); location.href='/board/" + idx + "';</script>");
+            out.flush();
         }
-        else return "redirect:/board/"+idx;
+        return "redirect:";
     }
     @PostMapping("board/{idx}/update")
     public String processingUpdateBoard(@PathVariable Long idx, Board board){
@@ -80,13 +103,26 @@ public class BoardController {
 
     //Delete
     @GetMapping("board/{idx}/delete")
-    public String deleteBoard(@PathVariable Long idx, HttpServletRequest request){
+    public String deleteBoard(@PathVariable Long idx, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        if(boardService.getByIdx(idx).get().getUser().getId().equals(((User)session.getAttribute("user")).getId())) {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-            boardService.deleteBoardByIdx(idx);
-            return "redirect:/board/list";
+        if (session.getAttribute("user") != null) {
+            if (boardService.getByIdx(idx).get().getUser().getId().equals(((User) session.getAttribute("user")).getId())) {
+                boardService.deleteBoardByIdx(idx);
+                return "redirect:/board/list";
+            }
+            else {  //작성자 아니면 삭제 못함
+                out.println("<script> alert('작성자만 삭제할 수 있습니다.'); location.href='/board/" + idx + "';</script>");
+                out.flush();
+            }
         }
-        else return "redirect:/board/"+idx;
+        else{   //로그인 안하면 삭제 못함
+            out.println("<script> alert('작성자만 삭제할 수 있습니다.'); location.href='/board/" + idx + "';</script>");
+            out.flush();
+        }
+            return "redirect:";
     }
 }

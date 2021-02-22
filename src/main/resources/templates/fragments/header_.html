@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+	Transit by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<header id="header" th:fragment="header">
+    <h1><a href="/">Community</a></h1>
+    <nav id="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/board/list">Board</a></li>
+            <li><a href="/mypage">MyPage</a></li>
+            <li th:if="${session.user == null}"><a href="/login" class="button special">Sign in</a></li>
+            <li th:unless="${session.user == null}"><a href="/logout" class="button special">Log out</a></li>
+        </ul>
+    </nav>
+</header>
+</html>
