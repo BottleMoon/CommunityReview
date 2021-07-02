@@ -17,4 +17,4 @@
 -----
 
 
-[배포](http://bottlemoon.tk)
+[배포](http://community.bottlemoon.me)
